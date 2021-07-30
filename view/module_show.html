@@ -1,0 +1,19 @@
+<div class="as">
+<?php if(empty($data['show'])): ?>
+	<div class="as-message">您查看的文章不存在。<p><a href="./">点我返回首页</a></p></div>
+	<?php else: ?>
+	<div class="as-title"><h1><?=$data['show']['title']?></h1></div>
+	<div class="as-row">
+		<span>栏目：<a href="list.php?cid=<?=$data['show']['cid']?>"><?=($data['show']['cname']?:'无')?></a></span>
+		<span>作者：<?=$data['show']['author']?:'匿名'?></span>
+		<span>发表时间：<?=$data['show']['time']?></span><span>阅读：<?=$data['show']['views']?>次</span>
+	</div>
+	<div class="as-content"><?=$data['show']['content']?></div>
+	<?php if(isset($data['show']['change'])): ?>
+		<div class="as-change">
+			<span>上一篇：<?php if($data['show']['change']['prev']): ?><a href="?id=<?=$data['show']['change']['prev']['id']?>" title="<?=$data['show']['change']['prev']['title']?>"><?=$data['show']['change']['prev']['title']?></a><?php else: ?>无<?php endif; ?></span>
+			<span>下一篇：<?php if($data['show']['change']['next']): ?><a href="?id=<?=$data['show']['change']['next']['id']?>" title="<?=$data['show']['change']['next']['title']?>"><?=$data['show']['change']['next']['title']?></a><?php else: ?>无<?php endif; ?></span>
+		</div>
+	<?php endif; ?>
+<?php endif; ?>
+</div>

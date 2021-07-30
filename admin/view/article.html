@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>后台</title>
+<link rel="stylesheet" href="./css/dashicons.css">
+<link rel="stylesheet" href="./css/style.css">
+<script src="./js/jquery.min.js"></script>
+</head>
+<body>
+<div class="wrap wrap-article">
+<h1>文章管理</h1>
+<div class="s-nav">
+	<div><form>
+		<select name="cid">
+			<option value="0">所有栏目</option>
+			<?php foreach($category[0] as $v): ?>
+				<option value="<?=$v['id']?>" <?=($v['id']==$cid)?'selected':''?> ><?=$v['name']?></option>
+				<?php if(isset($category[$v['id']])): foreach($category[$v['id']] as $vv): ?>
+					<option value="<?=$vv['id']?>" <?=($vv['id']==$cid)?'selected':''?> >—— <?=$vv['name']?></option>
+				<?php endforeach; endif; ?>
+			<?php endforeach; ?>
+		</select>
+		<input type="submit" value="筛选">
+	</form></div>
+	<div><form>
+		<select name="order">
+			<?php foreach($order_arr as $k=>$v): ?>
+				<option value="<?=$k?>" <?=($k==$order)?'selected':''?> ><?=$v['name']?></option>
+			<?php endforeach; ?>
+		</select>
+		<input type="submit" value="排序">
+	</form></div>
+	<div><form>
+		<input type="text" name="search" value="<?=$search?>" placeholder="输入关键字"><input type="submit" value="搜索文章">
+	</form></div>
+</div>
+<div class="tips"><?=tips($msg)?></div>
+<?php if($data): ?>
+<div class="box">
+<div class="box-body">
+	<table>
+		<tr><th width="80">状态</th><th>文章标题</th><th width="120">所属栏目</th><th width="100">作者</th><th width="150">创建时间</th><th width="100">操作</th></tr>
+		<?php foreach($data as $v): ?>
+			<tr>
+				<td class="s-show"><?=($v['show']=='yes')?'<i class="icon-yes">已发布</i>':'<i class="icon-wait">未发布</span>'?></td>
+				<td class="s-title"><a href="../show.php?id=<?=$v['id']?>" target="_blank"><?=$v['title']?></a></td>
+				<td><a href="?cid=<?=$v['cid']?>">[ <?=$v['cname']?:'无'?> ]</a></td>
+				<td><?=$v['author']?></td>
+				<td><?=$v['time']?></td>
+				<td class="s-act"><a href="cp_article_edit.php?id=<?=$v['id']?>">编辑</a><a href="?a=del&page=<?=$page?>&id=<?=$v['id']?>&token=<?=TOKEN?>" class="jq-del">删除</a></td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+	
+</div>
+</div>
+<div class="pagelist"><?=$page_html?></div>
+<?php endif; ?>
+</div>
+<script>
+(function(){
+	//删除前提示
+	$(".jq-del").click(function(){
+		return confirm("您确定要删除此文章？");
+	});
+})();
+</script>
+</body>
+</html>

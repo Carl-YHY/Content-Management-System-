@@ -1,0 +1,35 @@
+<div class="si">
+	<!-- 栏目列表 -->
+	<?php if(!empty($data['sidebar']['category'])): ?>
+		<div class="si-each">
+			<div class="si-title">内容栏目</div>
+			<div class="si-p1">
+				<?php foreach($data['sidebar']['category'] as $v): ?>
+					<a href="list.php?cid=<?=$v['id']?>" title="<?=$v['name']?>"><?=$v['name']?></a>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	<?php endif; ?>
+	<!-- 浏览历史 -->
+	<?php if(!empty($data['sidebar']['history'])): ?>
+		<div class="si-each">
+			<div class="si-title">浏览历史</div>
+			<div class="si-p2">
+				<?php foreach($data['sidebar']['history'] as $v): ?>
+					<p><a href="show.php?id=<?=$v['id']?>"><?=$v['title']?></a></p>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	<?php endif ?>
+	<!-- 最热文章 -->
+	<?php if(!empty($data['sidebar']['hot'])): ?>
+		<div class="si-each">
+			<div class="si-title"><span class="si-p3-top">TOP 10</span> 热门文章</div>
+			<div class="si-p3">
+				<?php foreach($data['sidebar']['hot'] as $v): ?>
+					<p><a href="show.php?id=<?=$v['id']?>"><?=$v['title']?></a></p>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	<?php endif ?>
+</div>

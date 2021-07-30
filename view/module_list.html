@@ -1,0 +1,23 @@
+<div class="al">
+	<?php if(!empty($data['list']['title'])): ?>
+		<div class="al-title"><h1><?=$data['list']['title']?></h1></div>
+	<?php endif; ?>
+	<?php if(empty($data['list']['data'])): ?>
+		<div class="al-message">该栏目内暂时没有内容。<p><a href="./">点击返回首页</a></p></div>
+	<?php else: ?>
+		<?php foreach($data['list']['data'] as $v): ?>
+			<div class="al-each">
+				<div class="al-info"><a href="show.php?id=<?=$v['id']?>"><?=$v['title']?></a></div>
+				<div class="al-desc"><?=$v['description']?></div>
+				<?php if($v['thumb']): ?>
+					<div class="al-img"><a href="show.php?id=<?=$v['id']?>"><img src="./upload/<?=$v['thumb']?>" alt="点击阅读文章"></a></div>
+				<?php endif; ?>
+				<div class="al-more">
+					<span>作者：<?=$v['author']?:'匿名'?> | 发表于：<?=$v['time']?></span>
+					<a href="show.php?id=<?=$v['id']?>">查看原文</a>
+				</div>
+			</div>
+		<?php endforeach; ?>
+		<div class="pagelist"><?=$data['list']['page_html']?></div>	
+	<?php endif; ?>
+</div>

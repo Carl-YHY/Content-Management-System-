@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>后台</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div class="wrap wrap-category-edit">
+<h1>栏目管理</h1>
+<div class="tips"><?=tips($msg)?></div>
+<div class="box">
+<div class="box-title">修改信息</div>	
+<div class="box-body">
+	<form method="post" action="?id=<?=$id?>&token=<?=TOKEN?>">
+	<table>
+		<tr><th width="80">栏目名称：</th><td><input type="text" name="name" value="<?=$data['name']?>"></td></tr>
+		<tr><th>上级节点：</th><td><select name="pid">
+			<option value="0">无</option>
+			<?php foreach($category as $v): ?>
+				<option value="<?=$v['id']?>" <?=($v['id']==$data['pid'])?'selected':''?> ><?=$v['name']?></option>
+			<?php endforeach; ?>
+		</select></tr>
+		<tr><th>显示顺序：</th><td><input type="text" class="s-num" name="sort" value="<?=$data['sort']?>"></td></tr>
+		<tr class="s-act"><th></th><td><input type="submit" value="提交更改"></td></tr>
+	</table>
+	</form>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="<?=$data['head']['keywords']?>">
+<meta name="description" content="<?=$data['head']['description']?>">
+<title><?=$data['head']['title']?> - 内容管理系统</title>
+<link rel="stylesheet" href="./css/style.css">
+<script src="./js/jquery.min.js"></script>
+<script src="./js/common.js"></script>
+</head>
+<body>
+<!--页面顶部-->
+<div class="top">
+	<div class="top-container">
+		<div class="top-logo">
+			<a href="./"><img src="./image/logo.png" alt="内容管理系统"></a>
+		</div>
+		<div class="top-nav">
+			<a href="./" class="<?=($data['nav']['curr']=='index')?'curr':''?>">首页</a>
+			<?php foreach($data['nav']['list'] as $v ): ?>
+				<a href="list.php?cid=<?=$v['id']?>" class="<?=$data['nav']['curr']=='cid_'.$v['id']?'curr':''?>"><?=$v['name']?></a>	
+			<?php endforeach; ?>
+			<a href="about.php" class="<?=$data['nav']['curr']=='about'?'curr':''?>">联系我们</a>
+		</div>
+		<div class="top-toggle jq-toggle-btn"><i></i><i></i><i></i></div>
+	</div>
+</div>
+<!--页面内容-->
+<div class="main">
+	<!-- 幻灯片模块 -->
+	<?php if(isset($data['slide'])){ require './view/module_slide.html'; } ?>
+	<!-- 文章列表模块 -->
+	<div class="main-body">
+		<div class="main-wrap">
+			<div class="main-left">
+				<?php if(isset($data['list'])){ require './view/module_list.html'; } ?>
+				<?php if(isset($data['show'])){ require './view/module_show.html'; } ?>
+			</div>
+			<div class="main-right">
+				<?php if(isset($data['sidebar'])){ require './view/module_sidebar.html'; } ?>
+			</div>
+		</div>
+	</div>
+</div>
+<!--页面尾部-->
+<div class="footer">PHP内容管理系统　本系统仅供参考和学习</div>
+</body>
+</html>
